@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Timing Out
+    // Timing Out //
     const logMsg = message => console.log(message);
 
     setTimeout(() => {
@@ -24,40 +24,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     getWords();
 
-});
-
-// Callbacks and Recursion
-const done = () => console.log("Job's done!");
-const countdown = (num, callback) => {
-    if (num > 0) {
-        console.log(num);
-        setTimeout(() => {
-            countdown(num - 1, callback);
-        }, 1000);
-    } else {
-        done();
-    }
-}
-
-countdown(4, done);
-
-// Promises, Promises ;)
-let lunchTime = false;
-const orderMeSomeFood = () => {
-    return new Promise((resolve, reject) => {
-        if (lunchTime) {
-            let lunch = {
-                lunch: "fried chicken",
-                drink: "sweet tea"
-            }
-            resolve(lunch);
+    // Callbacks and Recursion //
+    const done = () => console.log("Job's done!");
+    const countdown = (num, callback) => {
+        if (num > 0) {
+            console.log(num);
+            setTimeout(() => {
+                countdown(num - 1, callback);
+            }, 1000);
         } else {
-            let err = new Error("it's not lunchtime!");
-            reject(err);
+            done();
         }
-    });
-}
+    }
 
-orderMeSomeFood(lunchTime)
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
+    countdown(4, done);
+
+    // Promises, Promises ;) //
+    let lunchTime = false;
+    const orderMeSomeFood = (isLunchTime) => {
+        return new Promise((resolve, reject) => {
+            if (isLunchTime) {
+                let lunch = {
+                    lunch: "fried chicken",
+                    drink: "sweet tea"
+                }
+                resolve(lunch);
+            } else {
+                let err = new Error("it's not lunchtime!");
+                reject(err);
+            }
+        });
+    }
+
+    orderMeSomeFood(lunchTime)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+});
